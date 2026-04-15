@@ -29,14 +29,13 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "SchoolSphere — School Management System" },
+      { name: "description", content: "Complete school management system for students, teachers, classes, attendance, exams, fees, and more." },
+      { name: "author", content: "SchoolSphere" },
+      { property: "og:title", content: "SchoolSphere — School Management System" },
+      { property: "og:description", content: "Complete school management system for students, teachers, classes, attendance, exams, fees, and more." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {

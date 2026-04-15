@@ -1,4 +1,5 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { AuthProvider } from "../contexts/AuthContext";
 
 import appCss from "../styles.css?url";
 
@@ -35,7 +36,6 @@ export const Route = createRootRoute({
       { property: "og:title", content: "SchoolSphere — School Management System" },
       { property: "og:description", content: "Complete school management system for students, teachers, classes, attendance, exams, fees, and more." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
     ],
     links: [
       {
@@ -64,5 +64,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <AuthProvider>
+      <Outlet />
+    </AuthProvider>
+  );
 }

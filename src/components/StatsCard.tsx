@@ -3,7 +3,7 @@ interface StatsCardProps {
   value: string | number;
   icon: string;
   change?: string;
-  changeType?: "positive" | "negative" | "neutral";
+  changeType?: "positive" | "negative" | "neutral" | "warning";
 }
 
 export default function StatsCard({ title, value, icon, change, changeType = "neutral" }: StatsCardProps) {

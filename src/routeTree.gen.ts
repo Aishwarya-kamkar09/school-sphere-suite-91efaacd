@@ -26,6 +26,7 @@ import { Route as AppExamsRouteImport } from './routes/_app/exams'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
 import { Route as AppClassesRouteImport } from './routes/_app/classes'
 import { Route as AppAttendanceRouteImport } from './routes/_app/attendance'
+import { Route as AppStudentsStudentIdRouteImport } from './routes/_app/students.$studentId'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -111,6 +112,11 @@ const AppAttendanceRoute = AppAttendanceRouteImport.update({
   path: '/attendance',
   getParentRoute: () => AppRoute,
 } as any)
+const AppStudentsStudentIdRoute = AppStudentsStudentIdRouteImport.update({
+  id: '/$studentId',
+  path: '/$studentId',
+  getParentRoute: () => AppStudentsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -125,10 +131,11 @@ export interface FileRoutesByFullPath {
   '/messages': typeof AppMessagesRoute
   '/reports': typeof AppReportsRoute
   '/settings': typeof AppSettingsRoute
-  '/students': typeof AppStudentsRoute
+  '/students': typeof AppStudentsRouteWithChildren
   '/subjects': typeof AppSubjectsRoute
   '/teachers': typeof AppTeachersRoute
   '/timetable': typeof AppTimetableRoute
+  '/students/$studentId': typeof AppStudentsStudentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -143,10 +150,11 @@ export interface FileRoutesByTo {
   '/messages': typeof AppMessagesRoute
   '/reports': typeof AppReportsRoute
   '/settings': typeof AppSettingsRoute
-  '/students': typeof AppStudentsRoute
+  '/students': typeof AppStudentsRouteWithChildren
   '/subjects': typeof AppSubjectsRoute
   '/teachers': typeof AppTeachersRoute
   '/timetable': typeof AppTimetableRoute
+  '/students/$studentId': typeof AppStudentsStudentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -163,10 +171,11 @@ export interface FileRoutesById {
   '/_app/messages': typeof AppMessagesRoute
   '/_app/reports': typeof AppReportsRoute
   '/_app/settings': typeof AppSettingsRoute
-  '/_app/students': typeof AppStudentsRoute
+  '/_app/students': typeof AppStudentsRouteWithChildren
   '/_app/subjects': typeof AppSubjectsRoute
   '/_app/teachers': typeof AppTeachersRoute
   '/_app/timetable': typeof AppTimetableRoute
+  '/_app/students/$studentId': typeof AppStudentsStudentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -187,6 +196,7 @@ export interface FileRouteTypes {
     | '/subjects'
     | '/teachers'
     | '/timetable'
+    | '/students/$studentId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/subjects'
     | '/teachers'
     | '/timetable'
+    | '/students/$studentId'
   id:
     | '__root__'
     | '/'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/_app/subjects'
     | '/_app/teachers'
     | '/_app/timetable'
+    | '/_app/students/$studentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -353,8 +365,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAttendanceRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/students/$studentId': {
+      id: '/_app/students/$studentId'
+      path: '/$studentId'
+      fullPath: '/students/$studentId'
+      preLoaderRoute: typeof AppStudentsStudentIdRouteImport
+      parentRoute: typeof AppStudentsRoute
+    }
   }
 }
+
+interface AppStudentsRouteChildren {
+  AppStudentsStudentIdRoute: typeof AppStudentsStudentIdRoute
+}
+
+const AppStudentsRouteChildren: AppStudentsRouteChildren = {
+  AppStudentsStudentIdRoute: AppStudentsStudentIdRoute,
+}
+
+const AppStudentsRouteWithChildren = AppStudentsRoute._addFileChildren(
+  AppStudentsRouteChildren,
+)
 
 interface AppRouteChildren {
   AppAttendanceRoute: typeof AppAttendanceRoute
@@ -367,7 +398,7 @@ interface AppRouteChildren {
   AppMessagesRoute: typeof AppMessagesRoute
   AppReportsRoute: typeof AppReportsRoute
   AppSettingsRoute: typeof AppSettingsRoute
-  AppStudentsRoute: typeof AppStudentsRoute
+  AppStudentsRoute: typeof AppStudentsRouteWithChildren
   AppSubjectsRoute: typeof AppSubjectsRoute
   AppTeachersRoute: typeof AppTeachersRoute
   AppTimetableRoute: typeof AppTimetableRoute
@@ -384,7 +415,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppMessagesRoute: AppMessagesRoute,
   AppReportsRoute: AppReportsRoute,
   AppSettingsRoute: AppSettingsRoute,
-  AppStudentsRoute: AppStudentsRoute,
+  AppStudentsRoute: AppStudentsRouteWithChildren,
   AppSubjectsRoute: AppSubjectsRoute,
   AppTeachersRoute: AppTeachersRoute,
   AppTimetableRoute: AppTimetableRoute,

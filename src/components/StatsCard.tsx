@@ -7,7 +7,7 @@ interface StatsCardProps {
 }
 
 export default function StatsCard({ title, value, icon, change, changeType = "neutral" }: StatsCardProps) {
-  const changeColor = changeType === "positive" ? "text-success" : changeType === "negative" ? "text-destructive" : "text-muted-foreground";
+  const changeColor = changeType === "positive" ? "text-success" : changeType === "negative" ? "text-destructive" : changeType === "warning" ? "text-warning" : "text-muted-foreground";
 
   return (
     <div className="rounded-xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md">

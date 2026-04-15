@@ -1,4 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navItems = [
   { label: "Dashboard", path: "/dashboard", icon: "📊" },
@@ -19,6 +20,11 @@ const navItems = [
 
 export default function AppSidebar() {
   const location = useLocation();
+  const { user, userRole, signOut } = useAuth();
+
+  const displayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email || "User";
+  const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture;
+  const roleLabel = userRole ? userRole.charAt(0).toUpperCase() + userRole.slice(1) : "User";
 
   return (
     <aside className="fixed left-0 top-0 z-40 flex h-screen w-64 flex-col bg-sidebar text-sidebar-foreground">
@@ -57,14 +63,24 @@ export default function AppSidebar() {
 
       <div className="border-t border-sidebar-border p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sidebar-accent text-sm font-semibold text-sidebar-accent-foreground">
-            A
-          </div>
+          {avatarUrl ? (
+            <img src={avatarUrl} alt="" className="h-9 w-9 rounded-full object-cover" />
+          ) : (
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sidebar-accent text-sm font-semibold text-sidebar-accent-foreground">
+              {displayName.charAt(0).toUpperCase()}
+            </div>
+          )}
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-sidebar-foreground truncate">Admin User</p>
-            <p className="text-xs text-sidebar-foreground/60 truncate">admin@school.edu</p>
+            <p className="text-sm font-medium text-sidebar-foreground truncate">{displayName}</p>
+            <p className="text-xs text-sidebar-foreground/60">{roleLabel}</p>
           </div>
         </div>
+        <button
+          onClick={signOut}
+          className="mt-3 w-full rounded-lg bg-sidebar-accent/50 px-3 py-2 text-xs font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+        >
+          Sign Out
+        </button>
       </div>
     </aside>
   );

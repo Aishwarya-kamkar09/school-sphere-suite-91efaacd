@@ -14,16 +14,206 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      attendance_records: {
+        Row: {
+          class: string
+          created_at: string
+          date: string
+          id: string
+          marked_by: string | null
+          status: string
+          student_id: string
+        }
+        Insert: {
+          class: string
+          created_at?: string
+          date?: string
+          id?: string
+          marked_by?: string | null
+          status?: string
+          student_id: string
+        }
+        Update: {
+          class?: string
+          created_at?: string
+          date?: string
+          id?: string
+          marked_by?: string | null
+          status?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_records_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      students: {
+        Row: {
+          address: string | null
+          admission_date: string | null
+          class: string
+          created_at: string
+          date_of_birth: string | null
+          gender: string
+          guardian_name: string | null
+          guardian_phone: string | null
+          id: string
+          name: string
+          phone: string | null
+          roll_no: number
+          section: string
+          status: string
+          updated_at: string
+          user_id: string | null
+          usn: string
+        }
+        Insert: {
+          address?: string | null
+          admission_date?: string | null
+          class: string
+          created_at?: string
+          date_of_birth?: string | null
+          gender?: string
+          guardian_name?: string | null
+          guardian_phone?: string | null
+          id?: string
+          name: string
+          phone?: string | null
+          roll_no: number
+          section?: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          usn: string
+        }
+        Update: {
+          address?: string | null
+          admission_date?: string | null
+          class?: string
+          created_at?: string
+          date_of_birth?: string | null
+          gender?: string
+          guardian_name?: string | null
+          guardian_phone?: string | null
+          id?: string
+          name?: string
+          phone?: string | null
+          roll_no?: number
+          section?: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          usn?: string
+        }
+        Relationships: []
+      }
+      teachers: {
+        Row: {
+          classes: string | null
+          created_at: string
+          experience_years: number | null
+          id: string
+          name: string
+          phone: string | null
+          qualification: string | null
+          status: string
+          subject: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          classes?: string | null
+          created_at?: string
+          experience_years?: number | null
+          id?: string
+          name: string
+          phone?: string | null
+          qualification?: string | null
+          status?: string
+          subject: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          classes?: string | null
+          created_at?: string
+          experience_years?: number | null
+          id?: string
+          name?: string
+          phone?: string | null
+          qualification?: string | null
+          status?: string
+          subject?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "teacher" | "student"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +340,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "teacher", "student"],
+    },
   },
 } as const

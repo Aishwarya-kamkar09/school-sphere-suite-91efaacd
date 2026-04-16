@@ -58,7 +58,7 @@ function SignupPage() {
       <div className="flex min-h-screen items-center justify-center bg-muted/30">
         <div className="w-full max-w-md px-6">
           <div className="rounded-2xl border border-border bg-card p-8 shadow-lg text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-3xl">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-accent text-3xl">
               ✅
             </div>
             <h2 className="text-xl font-bold text-card-foreground">Check your email</h2>

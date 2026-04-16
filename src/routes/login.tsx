@@ -1,7 +1,8 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, Navigate } from "@tanstack/react-router";
 import { lovable } from "@/integrations/lovable";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
@@ -19,6 +20,10 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
+
+  if (authLoading) return null;
+  if (user) return <Navigate to="/dashboard" />;
 
   const handleGoogleLogin = async () => {
     setLoading(true);

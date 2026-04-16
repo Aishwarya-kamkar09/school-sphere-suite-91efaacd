@@ -16,32 +16,7 @@ function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-lg font-bold text-primary-foreground">
-              🎓
-            </div>
-            <div>
-              <span className="text-lg font-bold text-foreground">SchoolSphere</span>
-              <span className="ml-1 text-lg font-bold text-primary">Pro</span>
-            </div>
-          </div>
-          <nav className="hidden items-center gap-8 md:flex">
-            <a href="#features" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Features</a>
-            <a href="#stats" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">About</a>
-            <a href="#roles" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Roles</a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <Link to="/login" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
-              Log in
-            </Link>
-            <Link to="/signup" className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90">
-              Get Started Free
-            </Link>
-          </div>
-        </div>
-      </header>
+      <LandingHeader />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary/70">

@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, Navigate } from "@tanstack/react-router";
 import AppSidebar from "../components/AppSidebar";
 import { useAuth } from "../contexts/AuthContext";
+import { useIsMobile } from "../hooks/use-mobile";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayoutRoute,
@@ -8,6 +9,7 @@ export const Route = createFileRoute("/_app")({
 
 function AppLayoutRoute() {
   const { user, loading } = useAuth();
+  const isMobile = useIsMobile();
 
   if (loading) {
     return (
@@ -27,8 +29,8 @@ function AppLayoutRoute() {
   return (
     <div className="min-h-screen bg-background">
       <AppSidebar />
-      <main className="ml-64 min-h-screen">
-        <div className="p-6">
+      <main className={`min-h-screen ${isMobile ? "pt-14" : "ml-64"}`}>
+        <div className="p-4 md:p-6">
           <Outlet />
         </div>
       </main>

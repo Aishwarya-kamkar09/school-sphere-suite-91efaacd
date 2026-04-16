@@ -44,7 +44,8 @@ function SignupPage() {
       if (signUpError) {
         setError(signUpError.message);
       } else {
-        setSuccess(true);
+        // Auto-confirmed, navigate to dashboard
+        navigate({ to: "/dashboard" });
       }
     } catch {
       setError("An unexpected error occurred");

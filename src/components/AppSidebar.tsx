@@ -1,5 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/AuthContext";
+import { useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const navItems = [
   { label: "Dashboard", path: "/dashboard", icon: "📊" },
@@ -21,13 +23,91 @@ const navItems = [
 export default function AppSidebar() {
   const location = useLocation();
   const { user, userRole, signOut } = useAuth();
+  const isMobile = useIsMobile();
+  const [open, setOpen] = useState(false);
+
+  // Close sidebar on route change (mobile)
+  useEffect(() => {
+    if (isMobile) setOpen(false);
+  }, [location.pathname, isMobile]);
 
   const displayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email || "User";
   const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture;
   const roleLabel = userRole ? userRole.charAt(0).toUpperCase() + userRole.slice(1) : "User";
 
+  // Mobile: hamburger button + overlay sidebar
+  if (isMobile) {
+    return (
+      <>
+        {/* Hamburger button */}
+        <button
+          onClick={() => setOpen(true)}
+          className="fixed left-3 top-3 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-sidebar text-sidebar-foreground shadow-lg"
+          aria-label="Open menu"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+
+        {/* Overlay */}
+        {open && (
+          <div className="fixed inset-0 z-50 flex">
+            <div className="fixed inset-0 bg-black/50" onClick={() => setOpen(false)} />
+            <aside className="relative z-10 flex h-full w-64 flex-col bg-sidebar text-sidebar-foreground shadow-2xl">
+              {/* Close button */}
+              <button
+                onClick={() => setOpen(false)}
+                className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-lg text-sidebar-foreground/60 hover:bg-sidebar-accent"
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+              <SidebarContent
+                displayName={displayName}
+                avatarUrl={avatarUrl}
+                roleLabel={roleLabel}
+                currentPath={location.pathname}
+                signOut={signOut}
+              />
+            </aside>
+          </div>
+        )}
+      </>
+    );
+  }
+
+  // Desktop: fixed sidebar
   return (
     <aside className="fixed left-0 top-0 z-40 flex h-screen w-64 flex-col bg-sidebar text-sidebar-foreground">
+      <SidebarContent
+        displayName={displayName}
+        avatarUrl={avatarUrl}
+        roleLabel={roleLabel}
+        currentPath={location.pathname}
+        signOut={signOut}
+      />
+    </aside>
+  );
+}
+
+function SidebarContent({
+  displayName,
+  avatarUrl,
+  roleLabel,
+  currentPath,
+  signOut,
+}: {
+  displayName: string;
+  avatarUrl: string | undefined;
+  roleLabel: string;
+  currentPath: string;
+  signOut: () => Promise<void>;
+}) {
+  return (
+    <>
       <div className="flex h-16 items-center gap-3 border-b border-sidebar-border px-6">
         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground text-lg font-bold">
           S
@@ -41,7 +121,7 @@ export default function AppSidebar() {
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         <ul className="space-y-1">
           {navItems.map((item) => {
-            const isActive = location.pathname === item.path;
+            const isActive = currentPath === item.path;
             return (
               <li key={item.path}>
                 <Link
@@ -82,6 +162,6 @@ export default function AppSidebar() {
           Sign Out
         </button>
       </div>
-    </aside>
+    </>
   );
 }

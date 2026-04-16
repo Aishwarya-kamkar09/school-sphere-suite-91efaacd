@@ -1,12 +1,13 @@
-import { createFileRoute, Navigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { lovable } from "@/integrations/lovable";
+import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
   head: () => ({
     meta: [
-      { title: "Login — SchoolSphere" },
+      { title: "Login — SchoolSphere Pro" },
       { name: "description", content: "Sign in to SchoolSphere school management system." },
     ],
   }),
@@ -15,6 +16,9 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleGoogleLogin = async () => {
     setLoading(true);
@@ -26,7 +30,29 @@ function LoginPage() {
       if (result.error) {
         setError(result.error.message || "Login failed");
       }
-    } catch (err) {
+    } catch {
+      setError("An unexpected error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEmailLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setError("Please enter email and password");
+      return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+      if (signInError) {
+        setError(signInError.message);
+      } else {
+        navigate({ to: "/dashboard" });
+      }
+    } catch {
       setError("An unexpected error occurred");
     } finally {
       setLoading(false);
@@ -34,15 +60,16 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
+    <div className="flex min-h-screen items-center justify-center bg-muted/30">
       <div className="w-full max-w-md px-6">
         <div className="rounded-2xl border border-border bg-card p-8 shadow-lg">
-          <div className="mb-8 text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-2xl font-bold text-primary-foreground">
-              S
+          {/* Logo */}
+          <div className="mb-6 text-center">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-3xl text-primary-foreground">
+              🎓
             </div>
-            <h1 className="text-2xl font-bold text-card-foreground">SchoolSphere</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Sign in to access the management system</p>
+            <h1 className="text-2xl font-bold text-card-foreground">SchoolSphere Pro</h1>
+            <p className="mt-1 text-sm text-muted-foreground">School Management System</p>
           </div>
 
           {error && (
@@ -51,6 +78,7 @@ function LoginPage() {
             </div>
           )}
 
+          {/* Google Sign In */}
           <button
             onClick={handleGoogleLogin}
             disabled={loading}
@@ -65,8 +93,43 @@ function LoginPage() {
             {loading ? "Signing in..." : "Sign in with Google"}
           </button>
 
-          <p className="mt-6 text-center text-xs text-muted-foreground">
-            By signing in, you agree to our Terms of Service and Privacy Policy
+          {/* Divider */}
+          <div className="my-5 flex items-center gap-3">
+            <div className="h-px flex-1 bg-border" />
+            <span className="text-xs text-muted-foreground">OR</span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+
+          {/* Email/Password Form */}
+          <form onSubmit={handleEmailLogin} className="space-y-4">
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-card-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-card-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+            >
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
+          </form>
+
+          <p className="mt-5 text-center text-sm text-muted-foreground">
+            Don't have an account?{" "}
+            <Link to="/signup" className="font-medium text-primary hover:underline">
+              Sign Up
+            </Link>
           </p>
         </div>
       </div>

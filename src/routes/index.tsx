@@ -77,9 +77,9 @@ function LandingPage() {
               {/* Browser Chrome */}
               <div className="mb-2 flex items-center gap-2 rounded-t-lg bg-white/20 px-4 py-2.5">
                 <div className="flex gap-1.5">
-                  <div className="h-3 w-3 rounded-full bg-red-400/80" />
-                  <div className="h-3 w-3 rounded-full bg-yellow-400/80" />
-                  <div className="h-3 w-3 rounded-full bg-green-400/80" />
+                  <div className="h-3 w-3 rounded-full bg-destructive/60" />
+                  <div className="h-3 w-3 rounded-full bg-accent-foreground/40" />
+                  <div className="h-3 w-3 rounded-full bg-primary/60" />
                 </div>
                 <div className="ml-3 flex-1 rounded-md bg-white/20 px-3 py-1 text-xs text-primary-foreground/60">
                   app.schoolsphere.com/dashboard

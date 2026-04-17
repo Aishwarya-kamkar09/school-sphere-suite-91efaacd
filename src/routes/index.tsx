@@ -5,10 +5,10 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
   head: () => ({
     meta: [
-      { title: "SchoolSphere Pro — Complete School Automation & Analytics Platform" },
-      { name: "description", content: "A centralized hub connecting teachers, students, parents, and administrators. Streamline operations, enhance collaboration, and drive measurable improvements in academic outcomes." },
-      { property: "og:title", content: "SchoolSphere Pro — Complete School Automation & Analytics Platform" },
-      { property: "og:description", content: "A centralized hub connecting teachers, students, parents, and administrators in one unified platform." },
+      { title: "INDDIA ERP — Complete School Management Solution" },
+      { name: "description", content: "INDDIA ERP — a centralized hub connecting teachers, students, parents, and administrators. Manage students, attendance, fees, exams and more." },
+      { property: "og:title", content: "INDDIA ERP — Complete School Management Solution" },
+      { property: "og:description", content: "Complete school & college ERP. Streamline operations and academic outcomes." },
     ],
   }),
 });
@@ -26,13 +26,12 @@ function LandingPage() {
           {/* Left Content */}
           <div className="relative z-10 flex-1 text-center lg:text-left">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-primary-foreground/90 backdrop-blur-sm">
-              ⭐ Trusted by 500+ schools across India
+              ⭐ Trusted by 500+ institutes across India
             </div>
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl">
               Complete School{" "}
-              <span className="text-white/70">Automation &amp;</span>{" "}
-              <span className="text-white/70">Analytics</span>{" "}
-              Platform
+              <span className="text-white/70">Management</span>{" "}
+              Solution
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-primary-foreground/75 lg:text-xl">
               A centralized hub connecting teachers, students, parents, and administrators in one unified platform. Streamline operations, enhance collaboration, and drive measurable improvements in academic outcomes.
@@ -58,7 +57,7 @@ function LandingPage() {
                   <div className="h-3 w-3 rounded-full bg-primary/60" />
                 </div>
                 <div className="ml-3 flex-1 rounded-md bg-white/20 px-3 py-1 text-xs text-primary-foreground/60">
-                  app.schoolsphere.com/dashboard
+                  app.inddiaerp.com/dashboard
                 </div>
               </div>
               {/* Dashboard Content */}
@@ -183,8 +182,8 @@ function LandingPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">Ready to Transform Your School?</h2>
-          <p className="mt-4 text-lg text-muted-foreground">Join hundreds of schools already using SchoolSphere Pro to streamline their operations.</p>
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">Ready to Transform Your Institute?</h2>
+          <p className="mt-4 text-lg text-muted-foreground">Join hundreds of schools and colleges already using INDDIA ERP to streamline their operations.</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link to="/signup" className="rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl">
               Get Started Free →
@@ -200,10 +199,10 @@ function LandingPage() {
       <footer className="border-t border-border bg-muted/30 py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 sm:flex-row">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">🎓</div>
-            <span className="text-sm font-bold text-foreground">SchoolSphere Pro</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">IE</div>
+            <span className="text-sm font-bold text-foreground">INDDIA ERP</span>
           </div>
-          <p className="text-xs text-muted-foreground">© 2026 SchoolSphere Pro. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">© 2026 INDDIA ERP. All rights reserved.</p>
         </div>
       </footer>
     </div>
@@ -235,12 +234,12 @@ function LandingHeader() {
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-lg font-bold text-primary-foreground">
-            🎓
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
+            IE
           </div>
           <div>
-            <span className="text-lg font-bold text-foreground">SchoolSphere</span>
-            <span className="ml-1 text-lg font-bold text-primary">Pro</span>
+            <span className="text-lg font-bold text-foreground">INDDIA</span>
+            <span className="ml-1 text-lg font-bold text-primary">ERP</span>
           </div>
         </div>
         <nav className="hidden items-center gap-8 md:flex">

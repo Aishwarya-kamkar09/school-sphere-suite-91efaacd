@@ -109,12 +109,12 @@ function SidebarContent({
   return (
     <>
       <div className="flex h-16 items-center gap-3 border-b border-sidebar-border px-6">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground text-lg font-bold">
-          S
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground text-sm font-bold">
+          IE
         </div>
         <div>
-          <h1 className="text-base font-bold text-sidebar-primary-foreground">SchoolSphere</h1>
-          <p className="text-xs text-sidebar-foreground/60">Management Suite</p>
+          <h1 className="text-base font-bold text-sidebar-primary-foreground">INDDIA ERP</h1>
+          <p className="text-xs text-sidebar-foreground/60">School Management</p>
         </div>
       </div>
 

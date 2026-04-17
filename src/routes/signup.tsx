@@ -158,6 +158,7 @@ function SignupPage() {
             Have an account?{" "}
             <Link to="/login" className="font-semibold text-primary hover:underline">🔒 Login</Link>
           </p>
+          <p className="mt-2 text-xs text-muted-foreground">By signing up you agree to our Terms.</p>
         </div>
 
         <div />

@@ -8,8 +8,8 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
   head: () => ({
     meta: [
-      { title: "Login — SchoolSphere Pro" },
-      { name: "description", content: "Sign in to SchoolSphere school management system." },
+      { title: "Login — INDDIA ERP" },
+      { name: "description", content: "Sign in to INDDIA ERP school management system." },
     ],
   }),
 });
@@ -69,11 +69,11 @@ function LoginPage() {
         <div className="rounded-2xl border border-border bg-card p-8 shadow-lg">
           {/* Logo */}
           <div className="mb-6 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-3xl text-primary-foreground">
-              🎓
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-xl font-bold text-primary-foreground">
+              IE
             </div>
-            <h1 className="text-2xl font-bold text-card-foreground">SchoolSphere Pro</h1>
-            <p className="mt-1 text-sm text-muted-foreground">School Management System</p>
+            <h1 className="text-2xl font-bold text-card-foreground">INDDIA ERP</h1>
+            <p className="mt-1 text-sm text-muted-foreground">Complete School Management Solution</p>
           </div>
 
           {error && (

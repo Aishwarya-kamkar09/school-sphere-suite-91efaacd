@@ -83,6 +83,7 @@ export type Database = {
         Row: {
           address: string | null
           admission_date: string | null
+          branch: string
           class: string
           created_at: string
           date_of_birth: string | null
@@ -90,6 +91,7 @@ export type Database = {
           guardian_name: string | null
           guardian_phone: string | null
           id: string
+          institute: string
           name: string
           phone: string | null
           roll_no: number
@@ -102,6 +104,7 @@ export type Database = {
         Insert: {
           address?: string | null
           admission_date?: string | null
+          branch?: string
           class: string
           created_at?: string
           date_of_birth?: string | null
@@ -109,6 +112,7 @@ export type Database = {
           guardian_name?: string | null
           guardian_phone?: string | null
           id?: string
+          institute?: string
           name: string
           phone?: string | null
           roll_no: number
@@ -121,6 +125,7 @@ export type Database = {
         Update: {
           address?: string | null
           admission_date?: string | null
+          branch?: string
           class?: string
           created_at?: string
           date_of_birth?: string | null
@@ -128,6 +133,7 @@ export type Database = {
           guardian_name?: string | null
           guardian_phone?: string | null
           id?: string
+          institute?: string
           name?: string
           phone?: string | null
           roll_no?: number

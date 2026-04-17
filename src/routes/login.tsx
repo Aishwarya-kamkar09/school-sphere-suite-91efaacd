@@ -29,19 +29,11 @@ function LoginPage() {
     setLoading(true);
     setError("");
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
-  provider: "google",
-  options: {
-    redirectTo: `${window.location.origin}/dashboard`,
-  },
-});
-
-if (error) {
-  setError(error.message);
-}
-      if (result.error) {
-        setError(result.error.message || "Login failed");
-      }
+      const { error: oauthError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: `${window.location.origin}/dashboard` },
+      });
+      if (oauthError) setError(oauthError.message);
     } catch {
       setError("An unexpected error occurred");
     } finally {
